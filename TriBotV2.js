@@ -1,11 +1,20 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
 const fs = require('fs');
-const { Collection } = require('discord.js');
+const {
+    Collection
+} = require('discord.js');
 const config = require('./private/config');
+const { connect } = require('mongoose');
 
 client.on('ready', () => {
     console.log(`Logged in as ${client.user.tag} | ✅`);
+    
+    connect(config.config.mongo, {
+        useFindAndModify: true,
+        useNewUrlParser: true,
+        useUnifiedTopology: true
+    }).then(console.log('Connect to MongoDB | ✅'))
 });
 
 client.commands = new Collection();
@@ -14,6 +23,7 @@ client.category = fs.readdirSync("./commands");
 ['command'].forEach(handler => {
     require(`./handler/${handler}`)(client);
 });
+
 
 client.on('message', async message => {
     const prefix = config.config.prefix
