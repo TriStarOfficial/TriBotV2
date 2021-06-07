@@ -9,6 +9,8 @@
   "author": "Kanye East#7169",
   "license": "ISC",
   "dependencies": {
-    "discord.js": "^12.5.3"
+    "discord.js": "^12.5.3",
+    "fs": "^0.0.1-security",
+    "mongoose": "^5.12.13"
   }
 }
