@@ -6,6 +6,7 @@ const {
 } = require('discord.js');
 const config = require('./private/config');
 const { connect } = require('mongoose');
+client.Transcript = require('./schema/Ticket.js');
 
 client.on('ready', () => {
     console.log(`Logged in as ${client.user.tag} | ✅`);
@@ -37,6 +38,19 @@ client.on('message', async message => {
     let command = client.commands.get(cmd)
     if (!command) command = client.commands.get(client.aliases.get(cmd));
     if (command) command.run(client, message, args, prefix, command)
+})
+
+client.on('message', async message => {
+    if (message.channel.parentID !== config.config.TicketParent) return;
+    client.Transcript.findOne({ Channel: message.guild.id }, async(err, data) => {
+        if (err) throw err;
+        if (data) {
+            data.Content.push(`${message.author.tag}: ${message.content}`)
+        } else {
+            data = new client.Transcript({ Channel: message.channel.id, Content:`${message.author.tag}`, Author: message.channel.topic})
+        }
+        await data.save().catch(err => console.log(err))
+    })
 })
 
 client.login(config.config.token);
