@@ -1,0 +1,14 @@
+{
+  "name": "tribotv2",
+  "version": "1.0.0",
+  "description": "TriStar Bot V2",
+  "main": "TriBotV2.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Kanye East#7169",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^12.5.3"
+  }
+}
