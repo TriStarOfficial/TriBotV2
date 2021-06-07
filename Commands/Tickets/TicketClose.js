@@ -8,7 +8,6 @@ module.exports = {
      * @param { Message } message
      */
     run: async (client, message, args, prefix, command) => {
-        console.log(message.channel.parentID)
         if (message.channel.parentID !== '851450132385628210') return (await message.channel.send(new MessageEmbed().setColor('RED').setDescription('Wrong Category!'))).delete({ timeout: 5*1000 })
 
         if (message.channel.name.includes('closed')) return message.channel.send(new MessageEmbed().setColor('RED').setDescription('The Channel is already Closed. Stupid!'))

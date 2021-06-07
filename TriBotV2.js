@@ -18,6 +18,18 @@ client.on('ready', () => {
     }).then(console.log('Connect to MongoDB | ✅'))
 });
 
+const activitylist = [
+    "Cloud Development Die",
+    "TriStar Hub Win",
+    "Over TriStar Services",
+    "Your Mom Strip"
+]
+
+setInterval(() => {
+    const status = activitylist[Math.floor(Math.random() * activitylist.length)]
+    client.user.setActivity(status, { type: 'WATCHING' })
+}, 3*1000)
+
 client.commands = new Collection();
 client.aliases = new Collection();
 client.category = fs.readdirSync("./commands");
