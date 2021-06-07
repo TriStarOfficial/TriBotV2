@@ -1,39 +1,32 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
-
-const prefix = '-'
-
 const fs = require('fs');
+const { Collection } = require('discord.js');
+const config = require('./private/config');
 
-client.commands = new Discord.Collection();
-
-const commandFiles = fs.readdirSync('./Commands/').filter(file => file.endsWith('.js'));
-for (const file of commandFiles) {
-    const command = require(`./Commands/${file}`);
-
-    client.commands.set(command.name, command)
-}
-
-client.once('ready', () => {
-    console.log('Ready!')
+client.on('ready', () => {
+    console.log(`Logged in as ${client.user.tag} | ✅`);
 });
 
-client.on('message', message => {
-    if (!message.content.startsWith(prefix) || message.author.bot) return;
-
-    if (message.channel !== client.channels.cache.get('851370262032416798')) {
-        message.channel.send(`Bruh! Go to <#851370262032416798>`);
-        return;
-    }
-
-    const args = message.content.slice(prefix.length).split(/ +/);
-    const command = args.shift().toLowerCase();
-
-    if (command === 'ping!') {
-        client.commands.get('Ping').execute(message, args, Discord);
-    } else if (command === 'purge') {
-        client.commands.get('Purge').execute(message, args, Discord);
-    }
+client.commands = new Collection();
+client.aliases = new Collection();
+client.category = fs.readdirSync("./commands");
+['command'].forEach(handler => {
+    require(`./handler/${handler}`)(client);
 });
 
-client.login('ODQ5NjM2NzIzMTc5OTEzMjI2.YLeD3A.ZqA__sJ9_O8VM430H-r9HELXRsk');
+client.on('message', async message => {
+    const prefix = config.config.prefix
+
+    if (message.author.bot) return;
+    if (!message.content.startsWith(prefix)) return;
+    if (!message.member) message.member = await message.guild.fetchMember(message);
+    const args = message.content.slice(prefix.length).trim().split(/ +/g);
+    const cmd = args.shift().toLowerCase();
+    if (cmd.length == 0) return;
+    let command = client.commands.get(cmd)
+    if (!command) command = client.commands.get(client.aliases.get(cmd));
+    if (command) command.run(client, message, args, prefix, command)
+})
+
+client.login(config.config.token);
