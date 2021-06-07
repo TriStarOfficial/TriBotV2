@@ -1,9 +1,7 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
 const fs = require('fs');
-const {
-    Collection
-} = require('discord.js');
+const { Collection } = require('discord.js');
 const config = require('./private/config');
 const { connect } = require('mongoose');
 client.Transcript = require('./schema/Ticket.js');
