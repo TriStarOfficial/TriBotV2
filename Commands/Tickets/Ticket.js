@@ -16,11 +16,6 @@ module.exports = {
                 {
                     id: message.guild.id,
                     deny: ['SEND_MESSAGES','VIEW_CHANNEL'],
-                    //it doesn't show snippets hard to fix it
-                    // that === skill issue man, why would u need snippet
-                    // dont take it to heart, i
-                    //mRestartok    i gtg take shower
-                    //same error
 
                 },
                 {
