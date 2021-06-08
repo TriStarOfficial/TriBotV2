@@ -52,7 +52,7 @@ client.on('message', async message => {
 
 client.on('message', async message => {
     if (message.channel.parentID !== config.config.TicketParent) return;
-    client.Transcript.findOne({ Channel: message.guild.id }, async(err, data) => {
+    client.Transcript.findOne({ Channel: message.channel.id }, async(err, data) => {
         if (err) throw err;
         if (data) {
             data.Content.push(`${message.author.tag}: ${message.content}`)
