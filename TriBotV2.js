@@ -27,7 +27,17 @@ const activitylist = [
 setInterval(() => {
     const status = activitylist[Math.floor(Math.random() * activitylist.length)]
     client.user.setActivity(status, { type: 'WATCHING' })
-}, 3*1000)
+}, 5*1000)
+
+const GetVer3 = require('./Functions/Roblox/RbxVer.js')
+client.RobloxVersion = model('roblox',
+    new Schema({
+        ID: Number,
+        CurrentVersion: String,
+        OldVersion: String
+    })
+)
+GetVer3(client)
 
 client.commands = new Collection();
 client.aliases = new Collection();
