@@ -15,6 +15,7 @@ client.on('ready', () => {
         useUnifiedTopology: true
     }).then(console.log('Connect to MongoDB | ✅'))
 });
+const Alive = require('./server');
 
 const activitylist = [
     "Cloud Development Die",
@@ -63,4 +64,5 @@ client.on('message', async message => {
     })
 })
 
+Alive();
 client.login(config.config.token);
