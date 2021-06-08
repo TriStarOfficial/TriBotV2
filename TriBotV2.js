@@ -3,7 +3,7 @@ const client = new Discord.Client();
 const fs = require('fs');
 const { Collection } = require('discord.js');
 const config = require('./private/config');
-const { connect } = require('mongoose');
+const { connect, model, Schema } = require('mongoose');
 client.Transcript = require('./schema/Ticket.js');
 
 client.on('ready', () => {
@@ -41,7 +41,7 @@ GetVer3(client)
 
 client.commands = new Collection();
 client.aliases = new Collection();
-client.category = fs.readdirSync("./commands");
+client.category = fs.readdirSync("./Commands");
 ['command'].forEach(handler => {
     require(`./handler/${handler}`)(client);
 });

@@ -1,14 +1,17 @@
 const { MessageEmbed } = require("discord.js");
 const { readdirSync } = require("fs");
 
+//cannot be capital no prob
+// oh ok, thanks for telling me
+
 module.exports = {
-  name: "Help",
+  name: "help",
   aliases : ['h'],
   description: "Shows all available bot commands.",
   StaffCommand: false,
   BotCommand: true,
   Developer: false,
-  execute: async (client, message, args, text, prefix) => {
+  run: async (client, message, args, text, prefix) => {
 
 
     const roleColor =
@@ -19,13 +22,13 @@ module.exports = {
     if (!args[0]) {
       let categories = [];
 
-      readdirSync("./commands/").forEach((dir) => {
-        const commands = readdirSync(`./commands/${dir}/`).filter((file) =>
+      readdirSync("./Commands/").forEach((dir) => {
+        const commands = readdirSync(`./Commands/${dir}/`).filter((file) =>
           file.endsWith(".js")
         );
 
         const cmds = commands.map((command) => {
-          let file = require(`../../commands/${dir}/${command}`);
+          let file = require(`../../Commands/${dir}/${command}`);
 
           if (!file.name) return "No command name.";
 
@@ -86,7 +89,7 @@ module.exports = {
         )
         .addField(
           "USAGE:",
-          command.usage
+          command.usage ? command.usage : "No usage for this command!"
         )
         .addField(
           "DESCRIPTION:",

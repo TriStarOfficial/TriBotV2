@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 
 app.all('/', (req, res) => {
-    res.redirect('https://discord.gg/zCQQ9Y7hNW')
+    res.send('TriBot V2 Is UP')
 });
 
 function Alive() {
