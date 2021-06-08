@@ -11,6 +11,7 @@
   "dependencies": {
     "axios": "^0.21.1",
     "discord.js": "^12.5.3",
+    "express": "^4.17.1",
     "fs": "^0.0.1-security",
     "glob": "^7.1.7",
     "moment": "^2.29.1",
