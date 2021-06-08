@@ -33,15 +33,5 @@ module.exports = {
     
             await channel.send(MainEmbed)
         });
-
-        // hello - lapide
-        // channel.updateOverwrite(message.guild.id, {
-        //     SEND_MESSAGE: false,
-        //     VIEW_CHANNEL: false
-        // })
-        // channel.updateOverwrite(message.author, {
-        //     SEND_MESSAGE: true,
-        //     VIEW_CHANNEL: true
-        // })
     }
 }
